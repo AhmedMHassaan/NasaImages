@@ -84,7 +84,7 @@
                 style="@style/SubText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/_16sdp"
                 android:text="@string/descryption"
                 app:layout_constraintEnd_toEndOf="@id/date_text"
                 app:layout_constraintStart_toStartOf="@id/date_text"
@@ -96,7 +96,6 @@
                 android:layout_width="0dp"
                 android:text="@{nasaImage.description}"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/copyright_symbol"
                 app:layout_constraintEnd_toEndOf="@id/desc"
                 app:layout_constraintStart_toStartOf="@id/desc"
                 app:layout_constraintTop_toBottomOf="@id/desc"
@@ -104,14 +103,14 @@
 
             <TextView
                 android:id="@+id/keyword"
-                style="@style/MainText"
-                android:layout_width="wrap_content"
+                style="@style/SubText"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:text="@string/keywords"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/desc_text"
+                app:layout_constraintEnd_toEndOf="@id/desc_text"
                 app:layout_constraintTop_toBottomOf="@id/desc_text" />
 
             <TextView
@@ -120,10 +119,10 @@
                 android:layout_width="0dp"
                 android:text="@{nasaImage.keywordsAsString()}"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/keyword"
-                app:layout_constraintEnd_toEndOf="@+id/desc_text"
-                app:layout_constraintStart_toEndOf="@+id/keyword"
-                app:layout_constraintTop_toTopOf="@+id/keyword"
+                app:layout_constraintTop_toBottomOf="@id/keyword"
+                app:layout_constraintStart_toStartOf="@id/keyword"
+                app:layout_constraintEnd_toEndOf="@id/keyword"
+
                 tools:text="KEY WORD KKKK" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

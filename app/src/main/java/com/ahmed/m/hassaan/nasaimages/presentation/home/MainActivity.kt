@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.get
 import androidx.core.view.isInvisible
@@ -39,11 +40,19 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
         super.onCreate(savedInstanceState)
 
 
+        observeLiveData()
         binding.recViewImages.setupWithAdapter(
             nasaAdapter,
             GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
         )
 
+
+
+        events()
+
+    }
+
+    private fun observeLiveData() {
         with(viewModel) {
             images.onEach { onEachResult(it) }
                 .launchIn(this@MainActivity.lifecycleScope)
@@ -54,11 +63,22 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
             }
                 .launchIn(this@MainActivity.lifecycleScope)
 
+            paginationProgress.observe(this@MainActivity) {
+                binding.progress.isVisible = it
+            }
 
+            loadingDataProgress.observe(this@MainActivity) {
+                if (it)
+                    binding.recViewImages.showShimmerAdapter()
+                else
+                    binding.recViewImages.hideShimmerAdapter()
+            }
+
+
+            errorLiveData.observe(this@MainActivity){
+                Toast.makeText(this@MainActivity, it, Toast.LENGTH_SHORT).show()
+            }
         }
-
-        events()
-
     }
 
     private fun events() {
@@ -67,14 +87,10 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
                 viewModel.paginate()
             }
 
-            override fun showPaginationProgress() {
-                binding.progress.isVisible = true
-            }
-
         })
 
         nasaAdapter.listener = object : OnItemClickedWithView<DomainNasaImage> {
-            override fun onItemClicked(item: DomainNasaImage, v:View) {
+            override fun onItemClicked(item: DomainNasaImage, v: View) {
 
                 val intent = Intent(this@MainActivity, ActivityDetails::class.java)
                 val options = ActivityOptions
@@ -96,8 +112,9 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
 
         binding.txtSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
+                Log.d(App.APP_TAG, "MainActivity - onQueryTextSubmit:  query is $query")
                 viewModel.getFirstImagesByKeyword(query)
-                return true
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {

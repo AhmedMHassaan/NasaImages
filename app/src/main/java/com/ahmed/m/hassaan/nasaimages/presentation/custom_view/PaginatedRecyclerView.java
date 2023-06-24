@@ -73,7 +73,7 @@ public class PaginatedRecyclerView extends ShimmerRecyclerView {
                             if (!startedToFetchData) {
                                 if (callbacks != null) {
                                     callbacks.loadData();
-                                    callbacks.showPaginationProgress();
+//                                    callbacks.showPaginationProgress();
                                 } ;
                             }
                             loading = true;

@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ahmed.m.hassaan.domain.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -18,8 +20,6 @@ open class BaseViewModel :  ViewModel() {
 
     inline fun <T> Flow<Resource<T>>.dataHandling(
 
-        isShowError:Boolean = false,
-        isShowLoading: Boolean = false,
         crossinline success:(data:T) -> Unit,
         crossinline showLoading: (loading:Boolean) -> Unit = {},
         crossinline showError: (error:Throwable) -> Unit = {}
@@ -39,6 +39,6 @@ open class BaseViewModel :  ViewModel() {
         }.catch {
             showError.invoke(it)
         }
-            .launchIn(viewModelScope)
+            .launchIn(CoroutineScope(Dispatchers.IO))
     }
 }

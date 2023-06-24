@@ -1,11 +1,10 @@
 package com.ahmed.m.hassaan.data.mapper
 
-import com.ahmed.m.hassaan.data.model.ImagesResponseCollection
 import com.ahmed.m.hassaan.data.model.Items
 import com.ahmed.m.hassaan.domain.model.DomainNasaImage
 import javax.inject.Inject
 
-class NasaItemMapper @Inject constructor() : Mapper<Items, DomainNasaImage> {
+class RemoteNasaItemMapper @Inject constructor() : Mapper<Items, DomainNasaImage> {
     override fun mapDataToDomain(data: Items): DomainNasaImage {
         return DomainNasaImage(
             data.data[0].title,

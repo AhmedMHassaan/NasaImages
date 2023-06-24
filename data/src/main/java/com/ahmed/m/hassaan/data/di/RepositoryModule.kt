@@ -1,6 +1,6 @@
 package com.ahmed.m.hassaan.data.di
 
-import com.ahmed.m.hassaan.data.mapper.NasaItemMapper
+import com.ahmed.m.hassaan.data.mapper.RemoteNasaItemMapper
 import com.ahmed.m.hassaan.data.remote.api.SearchApiEndPoints
 import com.ahmed.m.hassaan.data.remote.datasources.RemoteDataSource
 import com.ahmed.m.hassaan.data.repository.SearchRepository
@@ -18,12 +18,16 @@ class RepositoryModule {
     @Provides
     fun provideRepository(
         remoteDataSource: RemoteDataSource,
-        domainPhotoMapper: NasaItemMapper
+        domainPhotoMapper: RemoteNasaItemMapper
     ): RemoteImagesRepository = SearchRepository(remoteDataSource, domainPhotoMapper)
 
     @Provides
-    fun provideNasaItemMapper():NasaItemMapper = NasaItemMapper()
+    fun provideNasaItemMapper():RemoteNasaItemMapper = RemoteNasaItemMapper()
 
     @Provides
     fun provideRemoteDataSource(remoteSearchApi:SearchApiEndPoints):RemoteDataSource = RemoteDataSource(remoteSearchApi)
+
+
+
+
 }

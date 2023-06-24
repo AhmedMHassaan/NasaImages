@@ -2,6 +2,8 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://jitpack.io" }
+
         gradlePluginPortal()
     }
 }
@@ -10,11 +12,15 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+
+        maven { url "https://jitpack.io" }
+//        tasks.withType(JavaCompile) {
+//            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+//        }
     }
 }
 rootProject.name = "NasaImages"
 include ':app'
 include ':data'
 include ':domain'
-include ':builddata'
 include ':core'

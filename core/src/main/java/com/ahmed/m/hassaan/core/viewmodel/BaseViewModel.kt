@@ -6,8 +6,10 @@ import com.ahmed.m.hassaan.domain.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onErrorReturn
 import javax.inject.Inject
 
 
@@ -19,8 +21,8 @@ open class BaseViewModel :  ViewModel() {
         isShowError:Boolean = false,
         isShowLoading: Boolean = false,
         crossinline success:(data:T) -> Unit,
-        crossinline showLoading: () -> Unit = {},
-        crossinline showError: () -> Unit = {}
+        crossinline showLoading: (loading:Boolean) -> Unit = {},
+        crossinline showError: (error:Throwable) -> Unit = {}
     ):Job{
         return this.onEach {
             when (it) {
@@ -28,12 +30,15 @@ open class BaseViewModel :  ViewModel() {
                     success.invoke(it.data)
                 }
                 is Resource.Loading -> {
-                    showLoading.invoke()
+                    showLoading.invoke(it.isLoading)
                 }
                 is Resource.Error -> {
-                    showError.invoke()
+                    showError.invoke(it.error)
                 }
             }
-        }.launchIn(viewModelScope)
+        }.catch {
+            showError.invoke(it)
+        }
+            .launchIn(viewModelScope)
     }
 }

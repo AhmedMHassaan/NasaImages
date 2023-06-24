@@ -6,6 +6,7 @@ import com.ahmed.m.hassaan.domain.model.DomainNasaImage
 import com.ahmed.m.hassaan.domain.model.Resource
 import com.ahmed.m.hassaan.domain.repository.RemoteImagesRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 

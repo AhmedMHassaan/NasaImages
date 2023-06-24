@@ -1,5 +1,7 @@
 package com.ahmed.m.hassaan.domain.model
 
+import java.io.Serializable
+
 data class DomainNasaImage(
     val title:String,
     val nasa_id:String,
@@ -10,4 +12,4 @@ data class DomainNasaImage(
     val secondary_creator:String?,
     val description:String,
     val imageLink:String
-)
+):Serializable

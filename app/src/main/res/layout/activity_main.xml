@@ -12,14 +12,55 @@
         android:layout_height="match_parent"
         tools:context=".presentation.home.MainActivity">
 
-        <TextView
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/rightGuide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/leftGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".05" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/txtSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:padding="@dimen/_5sdp"
+            app:iconifiedByDefault="true"
+            app:layout_constraintEnd_toStartOf="@id/rightGuide"
+            app:layout_constraintStart_toEndOf="@id/leftGuide"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.ahmed.m.hassaan.nasaimages.presentation.custom_view.PaginatedRecyclerView
+            android:layout_width="0dp"
+            app:shimmer_demo_layout="@layout/item_nasa_image_placeholder"
+            android:id="@+id/recViewImages"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toStartOf="@id/rightGuide"
+            app:layout_constraintStart_toEndOf="@id/leftGuide"
+            app:layout_constraintTop_toBottomOf="@id/txtSearch"
+            app:layout_constraintBottom_toTopOf="@id/progress"
+            tools:listitem="@layout/item_nasa_image"
+             />
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progress"
+            style="@style/SpinKitView.Large"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@id/rightGuide"
+            app:layout_constraintStart_toEndOf="@id/leftGuide"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/SpinKitView.FadingCircle"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

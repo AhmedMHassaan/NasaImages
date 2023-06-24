@@ -18,39 +18,53 @@ class HomeViewModel @Inject constructor(private val fetchPhotoUseCase: FetchPhot
     private val _images: MutableStateFlow<List<DomainNasaImage>> = MutableStateFlow(emptyList())
     val images get() = _images as StateFlow<List<DomainNasaImage>>
 
-    private var page:Int = 1
+    private val _pagination: MutableStateFlow<List<DomainNasaImage>> = MutableStateFlow(emptyList())
+    val paginatedImages get() = _pagination as StateFlow<List<DomainNasaImage>>
+
+
+    private var page: Int = 1
+
+    private var keyword = ""
 
 
     init {
         getFirstImagesByKeyword("moon")
     }
 
-    fun getFirstImagesByKeyword(keyword:String){
+    fun getFirstImagesByKeyword(keyword: String) {
+        this.keyword = keyword
+
         fetchPhotoUseCase.execute(
             FetchPhotoUseCase.Request(keyword, 1)
         ).dataHandling(
             success = {
                 Log.d(App.APP_TAG, "HomeViewModel - getFirstImagesByKeyword:  data is Ok with $it")
-                _images.value= it
+                _images.value = it
             },
-            isShowError = true,
             showError = {
-                Log.d(App.APP_TAG, "HomeViewModel - getFirstImagesByKeyword:  Error is ")
+                Log.d(App.APP_TAG, "HomeViewModel - getFirstImagesByKeyword:  Error is ${it} ")
+            },
+            showLoading = {
+                Log.d(
+                    App.APP_TAG,
+                    "HomeViewModel - getFirstImagesByKeyword:  progress loafing here"
+                )
             }
         )
     }
 
-    fun paginate(keyword: String){
+    fun paginate() {
+        page++
+
         fetchPhotoUseCase.execute(
-            FetchPhotoUseCase.Request(keyword, 1)
+            FetchPhotoUseCase.Request(keyword, page)
         ).dataHandling(
             success = {
                 Log.d(App.APP_TAG, "HomeViewModel - getFirstImagesByKeyword:  data is Ok with $it")
-                _images.value= it
+                _pagination.value = it
             }
         )
     }
-
 
 
 }

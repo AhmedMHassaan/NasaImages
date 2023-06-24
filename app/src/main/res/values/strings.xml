@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NasaImages</string>
+    <string name="keywords">Keywords</string>
+    <string name="date">Date\n</string>
+    <string name="descryption">Descryption</string>
+    <string name="title">Title</string>
 </resources>

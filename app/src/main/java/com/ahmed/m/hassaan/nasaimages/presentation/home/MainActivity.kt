@@ -4,6 +4,8 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.get
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -11,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ahmed.m.hassaan.core.activity.BaseActivityBinding
-import com.ahmed.m.hassaan.core.callbacks.OnItemClickedWithPosition
+import com.ahmed.m.hassaan.core.callbacks.OnItemClickedWithView
 import com.ahmed.m.hassaan.domain.model.DomainNasaImage
 import com.ahmed.m.hassaan.nasaimages.R
 import com.ahmed.m.hassaan.nasaimages.app.App
@@ -71,14 +73,14 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
 
         })
 
-        nasaAdapter.listener = object : OnItemClickedWithPosition<DomainNasaImage> {
-            override fun onItemClicked(position: Int, item: DomainNasaImage) {
+        nasaAdapter.listener = object : OnItemClickedWithView<DomainNasaImage> {
+            override fun onItemClicked(item: DomainNasaImage, v:View) {
 
                 val intent = Intent(this@MainActivity, ActivityDetails::class.java)
                 val options = ActivityOptions
                     .makeSceneTransitionAnimation(
                         this@MainActivity,
-                        binding.recViewImages[position],
+                        v,
                         "trans"
                     )
 
@@ -87,9 +89,21 @@ class MainActivity : BaseActivityBinding<ActivityMainBinding>() {
                         it.putExtra("item", item)
                     }, options.toBundle()
                 )
-                Log.d(App.APP_TAG, "MainActivity - onItemClicked:  started $position, $item")
+
             }
         }
+
+
+        binding.txtSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                viewModel.getFirstImagesByKeyword(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
     }
 
 

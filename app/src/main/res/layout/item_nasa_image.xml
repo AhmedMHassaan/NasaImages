@@ -11,11 +11,8 @@
 
         <variable
             name="listener"
-            type="com.ahmed.m.hassaan.core.callbacks.OnItemClickedWithPosition" />
+            type="com.ahmed.m.hassaan.core.callbacks.OnItemClickedWithView" />
 
-        <variable
-            name="pos"
-            type="Integer" />
     </data>
 
     <LinearLayout
@@ -23,7 +20,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{v->listener.onItemClicked(pos,item)}"
+        android:onClick="@{v->listener.onItemClicked(item,v)}"
         android:orientation="vertical">
 
         <com.google.android.material.card.MaterialCardView
@@ -45,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_150sdp"
                     android:contentDescription="@string/app_name"
-                    android:onClick="@{v->listener.onItemClicked(pos,item)}"
+                    android:onClick="@{v->listener.onItemClicked(item,v)}"
                     android:scaleType="centerCrop"
                     android:src="@mipmap/ic_launcher"
                     app:layout_constraintEnd_toEndOf="parent"

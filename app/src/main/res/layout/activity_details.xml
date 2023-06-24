@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="nasaImage"
+            type="com.ahmed.m.hassaan.domain.model.DomainNasaImage" />
 
     </data>
 
@@ -34,10 +37,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
                 android:fontFamily="@font/font1"
-                android:text="@string/app_name"
+                android:text="@string/title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detail_photo" />
@@ -48,6 +51,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/font1"
+                android:text="@{nasaImage.title}"
                 app:layout_constraintEnd_toEndOf="@id/title"
                 app:layout_constraintStart_toStartOf="@id/title"
                 app:layout_constraintTop_toBottomOf="@id/title"
@@ -58,8 +62,8 @@
                 style="@style/SubText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/app_name"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/date"
                 app:layout_constraintEnd_toEndOf="@id/title_text"
                 app:layout_constraintStart_toStartOf="@id/title_text"
                 app:layout_constraintTop_toBottomOf="@id/title_text" />
@@ -67,6 +71,7 @@
             <TextView
                 android:id="@+id/date_text"
                 style="@style/MainText"
+                android:text="@{nasaImage.date_created}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="@id/date"
@@ -75,49 +80,51 @@
                 tools:text="2011:12:9" />
 
             <TextView
-                android:id="@+id/explanation"
+                android:id="@+id/desc"
                 style="@style/SubText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/app_name"
+                android:text="@string/descryption"
                 app:layout_constraintEnd_toEndOf="@id/date_text"
                 app:layout_constraintStart_toStartOf="@id/date_text"
                 app:layout_constraintTop_toBottomOf="@id/date_text" />
 
             <TextView
-                android:id="@+id/explanation_text"
+                android:id="@+id/desc_text"
                 style="@style/MainText"
                 android:layout_width="0dp"
+                android:text="@{nasaImage.description}"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/copyright_symbol"
-                app:layout_constraintEnd_toEndOf="@id/explanation"
-                app:layout_constraintStart_toStartOf="@id/explanation"
-                app:layout_constraintTop_toBottomOf="@id/explanation"
-                tools:text="Phasellus gravida semper nisi. Vivamus elementum semper nisi. Cras non dolor." />
+                app:layout_constraintEnd_toEndOf="@id/desc"
+                app:layout_constraintStart_toStartOf="@id/desc"
+                app:layout_constraintTop_toBottomOf="@id/desc"
+                tools:text="Desc DEsc DESC DESC DESC" />
 
             <TextView
-                android:id="@+id/copyright_symbol"
+                android:id="@+id/keyword"
                 style="@style/MainText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="@string/app_name"
+                android:text="@string/keywords"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/explanation_text"
-                app:layout_constraintTop_toBottomOf="@id/explanation_text" />
+                app:layout_constraintStart_toStartOf="@id/desc_text"
+                app:layout_constraintTop_toBottomOf="@id/desc_text" />
 
             <TextView
-                android:id="@+id/copyright_text"
+                android:id="@+id/keyword_text"
                 style="@style/MainText"
                 android:layout_width="0dp"
+                android:text="@{nasaImage.keywordsAsString()}"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/copyright_symbol"
-                app:layout_constraintEnd_toEndOf="@+id/explanation_text"
-                app:layout_constraintStart_toEndOf="@+id/copyright_symbol"
-                app:layout_constraintTop_toTopOf="@+id/copyright_symbol"
-                tools:text="Leonardo Julio" />
+                app:layout_constraintBottom_toBottomOf="@+id/keyword"
+                app:layout_constraintEnd_toEndOf="@+id/desc_text"
+                app:layout_constraintStart_toEndOf="@+id/keyword"
+                app:layout_constraintTop_toTopOf="@+id/keyword"
+                tools:text="KEY WORD KKKK" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

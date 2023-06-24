@@ -1,5 +1,7 @@
 package com.ahmed.m.hassaan.core.callbacks
 
-interface OnItemClickedWithPosition<T> {
-    fun onItemClicked(position: Int, item: T)
+import android.view.View
+
+interface OnItemClickedWithView<T> {
+    fun onItemClicked( item: T, v:View)
 }

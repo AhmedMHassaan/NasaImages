@@ -8,6 +8,7 @@ import com.ahmed.m.hassaan.domain.model.DomainNasaImage
 import com.ahmed.m.hassaan.nasaimages.R
 import com.ahmed.m.hassaan.nasaimages.databinding.ActivityDetailsBinding
 import com.ahmed.m.hassaan.nasaimages.utils.ext.ImageViewExt.loadImage
+import com.ahmed.m.hassaan.nasaimages.utils.ext.IntentExt.getSerializableObject
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 
@@ -32,9 +33,10 @@ class ActivityDetails : BaseActivityBinding<ActivityDetailsBinding>() {
         }
 
 
-        nasaItem = intent.extras?.getSerializable("item") as DomainNasaImage
-
+        nasaItem = intent.getSerializableObject("item",DomainNasaImage::class.java)
         binding.detailPhoto.loadImage(nasaItem.imageLink)
+        binding.nasaImage = nasaItem
+
 
 
 

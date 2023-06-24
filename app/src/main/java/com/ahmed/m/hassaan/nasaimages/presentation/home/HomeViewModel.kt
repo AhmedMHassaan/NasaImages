@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(private val fetchPhotoUseCase: FetchPhot
 
 
     init {
-        getFirstImagesByKeyword("moon")
+//        getImagesFromCache()
     }
 
     fun getFirstImagesByKeyword(keyword: String) {
